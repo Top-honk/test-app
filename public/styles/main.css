@@ -1,0 +1,38 @@
+.form {
+  max-width: 330px;
+  padding: 1rem;
+}
+
+.form .form-floating:focus-within {
+  z-index: 2;
+}
+
+.form input[name="name"] {
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
+.form input {
+  margin-bottom: -1px;
+  border-radius: 0;
+}
+
+.form input[name="password_confirmation"] {
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.form .login input[name="login"] {
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
+.form .login input[name="password"] {
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.smart-captcha {
+  margin: 10px 0 10px 0;
+}
+
