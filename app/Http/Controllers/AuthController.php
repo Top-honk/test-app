@@ -45,9 +45,7 @@ class AuthController extends Controller {
     ]);
     $name = $request->input('name');
 
-    return back()->withErrors([
-      'name' => 'Пользователь с такими данными не найден',
-  ]);    
+    return redirect('login');
   }
 
   public function profile(Request $request) {
