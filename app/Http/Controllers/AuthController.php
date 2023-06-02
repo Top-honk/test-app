@@ -10,6 +10,17 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller {
+  private $validateErrors = [
+    'name.required' => 'Имя обязательно для заполнения',
+    'name.unique' => 'Такое имя уже существует',
+    'email.required' => 'Email обязателен для заполнения',
+    'email.unique' => 'Такой email уже существует',
+    'phone.required' => 'Номер обязателен для заполнения',
+    'password.required' => 'Пароль обязателен для заполнения',
+    'password.confirmed' => 'Пароли должны совпадать',
+    'password.min' => 'Пароль должен быть не менее 8 символов'
+  ];
+
   public function index() {
     return view('index');
   }
@@ -25,17 +36,7 @@ class AuthController extends Controller {
       'email' => 'required|unique:users',
       'phone' => 'required|min:11|numeric',
       'password' => 'required|confirmed|min:8',
-    ], [
-      'name.required' => 'Имя обязательно для заполнения',
-      'name.unique' => 'Такое имя уже существует',
-      'email.required' => 'Email обязателен для заполнения',
-      'email.unique' => 'Такой email уже существует',
-      'phone.required' => 'Номер обязателен для заполнения',
-      'password.required' => 'Пароль обязателен для заполнения',
-      'password.confirmed' => 'Пароли должны совпадать',
-      'password.min' => 'Пароль должен быть не менее 8 символов'
-      
-    ]);
+    ], $this->validateErrors);
 
     User::create([
       'name' => $request->input('name'),
@@ -66,7 +67,7 @@ class AuthController extends Controller {
       'email' => 'required',
       'phone' => 'required|min:11|numeric',
       'password' => ['required', 'confirmed', Password::min(8)],
-    ]);
+    ], $this->validateErrors);
 
     /*
       $validator = Validator::make($input, $rules, $messages = [
