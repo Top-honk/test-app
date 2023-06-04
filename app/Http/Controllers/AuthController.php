@@ -30,7 +30,6 @@ class AuthController extends Controller {
   }
 
   public function createUser(Request $request) {
-
     $validated = $request->validate([
       'name' => 'required|unique:users',
       'email' => 'required|unique:users',
@@ -38,6 +37,12 @@ class AuthController extends Controller {
       'password' => 'required|confirmed|min:8',
       'smart-token' => ['required']  
     ], $this->validateErrors);
+
+    if (!$this->checkCaptcha($validated['smart-token'])) {
+      return back()->withErrors([
+        'smart-token' => 'Капча нне пройдена',
+      ]);
+    }
 
     User::create([
       'name' => $request->input('name'),
