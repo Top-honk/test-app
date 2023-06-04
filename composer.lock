@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e69d2fbeb2de183330062806f67f195b",
+    "content-hash": "aa322c53454393ed775cfe4807d54a50",
     "packages": [
         {
             "name": "brick/math",
@@ -364,51 +364,6 @@
                 }
             ],
             "time": "2022-09-10T18:51:20+00:00"
-        },
-        {
-            "name": "dsoloview/laravel-yandex-captcha",
-            "version": "1.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/dsoloview/laravel-yandex-captcha.git",
-                "reference": "437163f61ad71ba97ae026696cfd0edd352763ce"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/dsoloview/laravel-yandex-captcha/zipball/437163f61ad71ba97ae026696cfd0edd352763ce",
-                "reference": "437163f61ad71ba97ae026696cfd0edd352763ce",
-                "shasum": ""
-            },
-            "require": {
-                "laravel/framework": "^9",
-                "php": ">=8.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Dsoloview\\YandexCaptcha\\LaravelProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Dsoloview\\YandexCaptcha\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "description": "Yandex captcha integration for Laravel",
-            "keywords": [
-                "Yandex Captha",
-                "Yandex SmartCaptcha",
-                "captcha",
-                "laravel"
-            ],
-            "support": {
-                "issues": "https://github.com/dsoloview/laravel-yandex-captcha/issues",
-                "source": "https://github.com/dsoloview/laravel-yandex-captcha/tree/1.0.0"
-            },
-            "time": "2023-02-19T12:45:07+00:00"
         },
         {
             "name": "egulias/email-validator",
@@ -1021,16 +976,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v10.13.0",
+            "version": "v10.13.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "7322723585103082758d74917db62980684845cb"
+                "reference": "c1569099594168870cb4bdabfbaa35e5d172310b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/7322723585103082758d74917db62980684845cb",
-                "reference": "7322723585103082758d74917db62980684845cb",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/c1569099594168870cb4bdabfbaa35e5d172310b",
+                "reference": "c1569099594168870cb4bdabfbaa35e5d172310b",
                 "shasum": ""
             },
             "require": {
@@ -1217,7 +1172,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2023-05-30T14:46:25+00:00"
+            "time": "2023-06-02T13:13:10+00:00"
         },
         {
             "name": "laravel/sanctum",
@@ -7971,14 +7926,7 @@
             "time": "2021-07-28T10:34:58+00:00"
         }
     ],
-    "aliases": [
-        {
-            "package": "laravel/framework",
-            "version": "10.13.0.0",
-            "alias": "9.52.8",
-            "alias_normalized": "9.52.8.0"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": [],
     "prefer-stable": true,
