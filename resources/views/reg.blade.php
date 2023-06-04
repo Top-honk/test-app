@@ -39,7 +39,7 @@
     <div
         id="captcha-container"
         class="smart-captcha"
-        data-sitekey="ysc1_pPVoftKnHiDVf5biJbtNku3QHV82dI2cghcgC2Foc8d1763c"
+        data-sitekey="ysc1_oyGghbIPWoWEck9uW5QNcfEHEQuQ7Lf86s3GZate7e09d497"
     ></div>
     <button class="btn btn-primary w-100 py-2" type="submit">Регистрация</button>
   </form>
