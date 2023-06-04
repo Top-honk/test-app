@@ -7,9 +7,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
-use Dsoloview\YandexCaptcha\Rules\YandexCaptcha;  
-
+use Illuminate\Support\Facades\Validator; 
 
 class AuthController extends Controller {
   private $validateErrors = [
@@ -38,7 +36,7 @@ class AuthController extends Controller {
       'email' => 'required|unique:users',
       'phone' => 'required|min:11|numeric',
       'password' => 'required|confirmed|min:8',
-      'smart-token' => ['required', new YandexCaptcha]  
+      'smart-token' => ['required']  
     ], $this->validateErrors);
 
     User::create([
@@ -113,8 +111,14 @@ class AuthController extends Controller {
       $credentials = $request->validate([
           'login' => ['required'],
           'password' => ['required'],
-          'smart-token' => ['required', new YandexCaptcha] 
+          'smart-token' => ['required'] 
       ]);
+
+      if (!$this->checkCaptcha($credentials['smart-token'])) {
+        return back()->withErrors([
+          'smart-token' => 'Капча нне пройдена',
+        ]);
+      }
 
       $loginIsEmail = Validator::make($request->all(), ['login' => 'required|email'])->errors()->first('login') == "";
       $loginIsPhone = Validator::make($request->all(), ['login' => 'required|min:11|numeric'])->errors()->first('login') == "";
@@ -142,5 +146,28 @@ class AuthController extends Controller {
       $request->session()->regenerateToken();
       return redirect('/');
   }
-}
 
+  private function checkCaptcha($token) {
+    $ch = curl_init();
+    $args = http_build_query([
+        "secret" => 'ysc2_oyGghbIPWoWEck9uW5QNrbgplbOnDnw7PlSZL4G4999854dc',
+        "token" => $token,
+        "ip" => $_SERVER['REMOTE_ADDR'], // Нужно передать IP пользователя.
+                                         // Как правильно получить IP зависит от вашего прокси.
+    ]);
+    curl_setopt($ch, CURLOPT_URL, "https://captcha-api.yandex.ru/validate?$args");
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_TIMEOUT, 1);
+
+    $server_output = curl_exec($ch);
+    $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    curl_close($ch);
+
+    if ($httpcode !== 200) {
+        echo "Allow access due to an error: code=$httpcode; message=$server_output\n";
+        return true;
+    }
+    $resp = json_decode($server_output);
+    return $resp->status === "ok";
+  }
+}
