@@ -21,11 +21,8 @@
       <input type="password" class="form-control" name="password" placeholder="Password">
       <label for="floatingPassword">Пароль</label>
     </div>
-    <div
-        id="captcha-container"
-        class="smart-captcha"
-        data-sitekey="ysc1_pPVoftKnHiDVf5biJbtNku3QHV82dI2cghcgC2Foc8d1763c"
-    ></div>
+    <x-yandex-captcha></x-yandex-captcha>
+
     <button class="btn btn-primary w-100 py-2 mt-3" type="submit">Войти</button>
   </form>
 </main>

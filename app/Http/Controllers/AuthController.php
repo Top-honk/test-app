@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Dsoloview\YandexCaptcha\Rules\YandexCaptcha;  
+
 
 class AuthController extends Controller {
   private $validateErrors = [
@@ -18,7 +20,7 @@ class AuthController extends Controller {
     'phone.required' => 'Номер обязателен для заполнения',
     'password.required' => 'Пароль обязателен для заполнения',
     'password.confirmed' => 'Пароли должны совпадать',
-    'password.min' => 'Пароль должен быть не менее 8 символов'
+    'password.min' => 'Пароль должен быть не менее 8 символов',
   ];
 
   public function index() {
@@ -36,6 +38,7 @@ class AuthController extends Controller {
       'email' => 'required|unique:users',
       'phone' => 'required|min:11|numeric',
       'password' => 'required|confirmed|min:8',
+      'smart-token' => ['required', new YandexCaptcha]  
     ], $this->validateErrors);
 
     User::create([
@@ -110,6 +113,7 @@ class AuthController extends Controller {
       $credentials = $request->validate([
           'login' => ['required'],
           'password' => ['required'],
+          'smart-token' => ['required', new YandexCaptcha] 
       ]);
 
       $loginIsEmail = Validator::make($request->all(), ['login' => 'required|email'])->errors()->first('login') == "";
